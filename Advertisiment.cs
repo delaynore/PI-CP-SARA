@@ -8,7 +8,7 @@ namespace MyApp
 {
     class Advertisiment
     {
-        public Advertisiment(Car car, string name, double price, Status saleStatus, Bitmap image)
+        public Advertisiment(Car car, double price, Status saleStatus, Bitmap image)
         {
             Car = car;
             Price = price;
