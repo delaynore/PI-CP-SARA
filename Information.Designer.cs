@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Information));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.LabelInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,13 +44,12 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // textBox1
+            // LabelInfo
             // 
-            this.textBox1.Location = new System.Drawing.Point(169, 12);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(251, 161);
-            this.textBox1.TabIndex = 1;
+            this.LabelInfo.Location = new System.Drawing.Point(169, 12);
+            this.LabelInfo.Name = "LabelInfo";
+            this.LabelInfo.Size = new System.Drawing.Size(251, 161);
+            this.LabelInfo.TabIndex = 1;
             // 
             // Information
             // 
@@ -58,20 +57,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(432, 191);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.LabelInfo);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Information";
             this.Load += new System.EventHandler(this.Information_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private PictureBox pictureBox1;
-        private TextBox textBox1;
+        private Label LabelInfo;
     }
 }

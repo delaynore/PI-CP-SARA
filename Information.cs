@@ -16,7 +16,7 @@ namespace MyApp
         {
             InitializeComponent();
             this.Text = title;
-            textBox1.Text = info;
+            LabelInfo.Text = info;
         }
 
         private void Information_Load(object sender, EventArgs e)
