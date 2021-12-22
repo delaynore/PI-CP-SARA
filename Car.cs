@@ -13,12 +13,12 @@ namespace MyApp
         public string Model { get; private set; }
         public int YearRelease { get; set; }
         public int KmAge { get; set; }
-        public EngineType Engine { get; set; }
-        public SteeringWheelType SteeringWheel { get; set; }
-        public GearBoxType GearBox { get; set; }
-        public CarType Type { get; set; }
+        public string Engine { get; set; }
+        public string SteeringWheel { get; set; }
+        public string GearBox { get; set; }
+        public string Type { get; set; }
 
-        public Car(string brand, string model, int yearRelease, int kmAge, EngineType engine, GearBoxType gearBox, CarType type, SteeringWheelType steeringWheel)
+        public Car(string brand, string model, int yearRelease, int kmAge, string engine, string gearBox, string type, string steeringWheel)
         {
             Brand = brand;
             Model = model;
