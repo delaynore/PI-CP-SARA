@@ -55,6 +55,8 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.ClearFormButton = new System.Windows.Forms.Button();
+            this.SaveAdvButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ImageCar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -305,12 +307,32 @@
             this.comboBox5.Size = new System.Drawing.Size(121, 23);
             this.comboBox5.TabIndex = 25;
             // 
+            // ClearFormButton
+            // 
+            this.ClearFormButton.Location = new System.Drawing.Point(12, 426);
+            this.ClearFormButton.Name = "ClearFormButton";
+            this.ClearFormButton.Size = new System.Drawing.Size(98, 23);
+            this.ClearFormButton.TabIndex = 26;
+            this.ClearFormButton.Text = "Очистить";
+            this.ClearFormButton.UseVisualStyleBackColor = true;
+            // 
+            // SaveAdvButton
+            // 
+            this.SaveAdvButton.Location = new System.Drawing.Point(482, 426);
+            this.SaveAdvButton.Name = "SaveAdvButton";
+            this.SaveAdvButton.Size = new System.Drawing.Size(174, 23);
+            this.SaveAdvButton.TabIndex = 27;
+            this.SaveAdvButton.Text = "Сохранить";
+            this.SaveAdvButton.UseVisualStyleBackColor = true;
+            // 
             // CreateAdvertForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(673, 461);
+            this.Controls.Add(this.SaveAdvButton);
+            this.Controls.Add(this.ClearFormButton);
             this.Controls.Add(this.comboBox5);
             this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.comboBox3);
@@ -376,5 +398,7 @@
         private ComboBox comboBox3;
         private ComboBox comboBox4;
         private ComboBox comboBox5;
+        private Button ClearFormButton;
+        private Button SaveAdvButton;
     }
 }
