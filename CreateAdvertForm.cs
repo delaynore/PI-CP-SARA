@@ -15,8 +15,8 @@ namespace MyApp
 {
     public partial class CreateAdvertForm : Form
     {
-        private SqlConnection sqlConnection = null;
-        private string ImagePath = null;
+        private SqlConnection? sqlConnection = null;
+        private string? ImagePath = null;
         private Form parentForm;
         public CreateAdvertForm(Form form)
         {
@@ -26,7 +26,6 @@ namespace MyApp
 
         private void BackToMainFormButton_Click(object sender, EventArgs e)
         {
-            sqlConnection.Close();
             this.Close();
             parentForm.Show();
         }
@@ -39,8 +38,7 @@ namespace MyApp
                 YearsComboBox.Items.Add(i);
             }
 
-            sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DataBaseConnectionString"].ConnectionString);
-            sqlConnection.Open();
+            
         }
 
         private void YearsComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -50,9 +48,39 @@ namespace MyApp
 
         private void SaveAdvButton_Click(object sender, EventArgs e)
         {
+            if (AllFieldsAreFilled())
+            {
+                sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DataBaseConnectionString"].ConnectionString);
+                try
+                {
+                    sqlConnection.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                if (sqlConnection.State == ConnectionState.Open)
+                {
 
+                    sqlConnection.Close();
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Не все поля заполнены"); // добавить
+            }
         }
-
+        private bool AllFieldsAreFilled()
+        {
+            if (BrandText.Text == null || ModelText.Text == null
+                || YearsComboBox.Text == null || BodyComboBox.Text == null
+                || KmAgeText.Text == null || SteeringWheelText.Text == null
+                || TypeDriveText.Text == null || GearBoxText.Text == null
+                || MotorText.Text == null || ImagePath == null
+                || TextAboutCar.Text == null) return false;
+            return true;
+        }
         private void ClearFormButton_Click(object sender, EventArgs e)
         {
             BrandText.Text = null;
