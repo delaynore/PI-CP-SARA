@@ -57,6 +57,8 @@
             this.MotorText = new System.Windows.Forms.ComboBox();
             this.ClearFormButton = new System.Windows.Forms.Button();
             this.SaveAdvButton = new System.Windows.Forms.Button();
+            this.PriceLabel = new System.Windows.Forms.Label();
+            this.PriceText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ImageCar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,11 +111,12 @@
             this.InfoCreateAdvButton.TabIndex = 4;
             this.InfoCreateAdvButton.Text = "Справка";
             this.InfoCreateAdvButton.UseVisualStyleBackColor = false;
+            this.InfoCreateAdvButton.Click += new System.EventHandler(this.InfoCreateAdvButton_Click);
             // 
             // BrandLabel
             // 
             this.BrandLabel.AutoSize = true;
-            this.BrandLabel.Location = new System.Drawing.Point(8, 80);
+            this.BrandLabel.Location = new System.Drawing.Point(62, 77);
             this.BrandLabel.Name = "BrandLabel";
             this.BrandLabel.Size = new System.Drawing.Size(43, 15);
             this.BrandLabel.TabIndex = 5;
@@ -122,7 +125,7 @@
             // ModelLabel
             // 
             this.ModelLabel.AutoSize = true;
-            this.ModelLabel.Location = new System.Drawing.Point(8, 116);
+            this.ModelLabel.Location = new System.Drawing.Point(55, 111);
             this.ModelLabel.Name = "ModelLabel";
             this.ModelLabel.Size = new System.Drawing.Size(50, 15);
             this.ModelLabel.TabIndex = 6;
@@ -131,7 +134,7 @@
             // YearRelease
             // 
             this.YearRelease.AutoSize = true;
-            this.YearRelease.Location = new System.Drawing.Point(8, 152);
+            this.YearRelease.Location = new System.Drawing.Point(30, 145);
             this.YearRelease.Name = "YearRelease";
             this.YearRelease.Size = new System.Drawing.Size(75, 15);
             this.YearRelease.TabIndex = 7;
@@ -140,7 +143,7 @@
             // BodyTypeLabel
             // 
             this.BodyTypeLabel.AutoSize = true;
-            this.BodyTypeLabel.Location = new System.Drawing.Point(8, 188);
+            this.BodyTypeLabel.Location = new System.Drawing.Point(67, 179);
             this.BodyTypeLabel.Name = "BodyTypeLabel";
             this.BodyTypeLabel.Size = new System.Drawing.Size(38, 15);
             this.BodyTypeLabel.TabIndex = 8;
@@ -158,7 +161,7 @@
             // KmAgeLabel
             // 
             this.KmAgeLabel.AutoSize = true;
-            this.KmAgeLabel.Location = new System.Drawing.Point(8, 224);
+            this.KmAgeLabel.Location = new System.Drawing.Point(57, 213);
             this.KmAgeLabel.Name = "KmAgeLabel";
             this.KmAgeLabel.Size = new System.Drawing.Size(48, 15);
             this.KmAgeLabel.TabIndex = 10;
@@ -167,7 +170,7 @@
             // LeftOrRightSteeringWheelLabel
             // 
             this.LeftOrRightSteeringWheelLabel.AutoSize = true;
-            this.LeftOrRightSteeringWheelLabel.Location = new System.Drawing.Point(8, 260);
+            this.LeftOrRightSteeringWheelLabel.Location = new System.Drawing.Point(49, 247);
             this.LeftOrRightSteeringWheelLabel.Name = "LeftOrRightSteeringWheelLabel";
             this.LeftOrRightSteeringWheelLabel.Size = new System.Drawing.Size(56, 15);
             this.LeftOrRightSteeringWheelLabel.TabIndex = 11;
@@ -176,7 +179,7 @@
             // TypeDriveLabel
             // 
             this.TypeDriveLabel.AutoSize = true;
-            this.TypeDriveLabel.Location = new System.Drawing.Point(8, 296);
+            this.TypeDriveLabel.Location = new System.Drawing.Point(56, 281);
             this.TypeDriveLabel.Name = "TypeDriveLabel";
             this.TypeDriveLabel.Size = new System.Drawing.Size(49, 15);
             this.TypeDriveLabel.TabIndex = 12;
@@ -185,7 +188,7 @@
             // GearBoxLabel
             // 
             this.GearBoxLabel.AutoSize = true;
-            this.GearBoxLabel.Location = new System.Drawing.Point(8, 332);
+            this.GearBoxLabel.Location = new System.Drawing.Point(3, 315);
             this.GearBoxLabel.Name = "GearBoxLabel";
             this.GearBoxLabel.Size = new System.Drawing.Size(102, 15);
             this.GearBoxLabel.TabIndex = 13;
@@ -194,7 +197,7 @@
             // MotorLabel
             // 
             this.MotorLabel.AutoSize = true;
-            this.MotorLabel.Location = new System.Drawing.Point(8, 372);
+            this.MotorLabel.Location = new System.Drawing.Point(42, 349);
             this.MotorLabel.Name = "MotorLabel";
             this.MotorLabel.Size = new System.Drawing.Size(63, 15);
             this.MotorLabel.TabIndex = 14;
@@ -220,14 +223,14 @@
             // 
             // BrandText
             // 
-            this.BrandText.Location = new System.Drawing.Point(115, 76);
+            this.BrandText.Location = new System.Drawing.Point(115, 74);
             this.BrandText.Name = "BrandText";
             this.BrandText.Size = new System.Drawing.Size(158, 23);
             this.BrandText.TabIndex = 17;
             // 
             // ModelText
             // 
-            this.ModelText.Location = new System.Drawing.Point(115, 117);
+            this.ModelText.Location = new System.Drawing.Point(115, 108);
             this.ModelText.Name = "ModelText";
             this.ModelText.Size = new System.Drawing.Size(158, 23);
             this.ModelText.TabIndex = 18;
@@ -236,7 +239,7 @@
             // 
             this.YearsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.YearsComboBox.FormattingEnabled = true;
-            this.YearsComboBox.Location = new System.Drawing.Point(115, 151);
+            this.YearsComboBox.Location = new System.Drawing.Point(115, 142);
             this.YearsComboBox.Name = "YearsComboBox";
             this.YearsComboBox.Size = new System.Drawing.Size(158, 23);
             this.YearsComboBox.Sorted = true;
@@ -254,7 +257,7 @@
             "Седан",
             "Универсал",
             "Хетчбек"});
-            this.BodyComboBox.Location = new System.Drawing.Point(115, 188);
+            this.BodyComboBox.Location = new System.Drawing.Point(115, 176);
             this.BodyComboBox.Name = "BodyComboBox";
             this.BodyComboBox.Size = new System.Drawing.Size(121, 23);
             this.BodyComboBox.Sorted = true;
@@ -262,7 +265,7 @@
             // 
             // KmAgeText
             // 
-            this.KmAgeText.Location = new System.Drawing.Point(115, 221);
+            this.KmAgeText.Location = new System.Drawing.Point(115, 210);
             this.KmAgeText.Name = "KmAgeText";
             this.KmAgeText.Size = new System.Drawing.Size(121, 23);
             this.KmAgeText.TabIndex = 21;
@@ -274,7 +277,7 @@
             this.SteeringWheelText.Items.AddRange(new object[] {
             "Левый",
             "Правый"});
-            this.SteeringWheelText.Location = new System.Drawing.Point(115, 257);
+            this.SteeringWheelText.Location = new System.Drawing.Point(115, 244);
             this.SteeringWheelText.Name = "SteeringWheelText";
             this.SteeringWheelText.Size = new System.Drawing.Size(121, 23);
             this.SteeringWheelText.TabIndex = 22;
@@ -287,7 +290,7 @@
             "Передний",
             "Задний",
             "Полный"});
-            this.TypeDriveText.Location = new System.Drawing.Point(115, 295);
+            this.TypeDriveText.Location = new System.Drawing.Point(115, 278);
             this.TypeDriveText.Name = "TypeDriveText";
             this.TypeDriveText.Size = new System.Drawing.Size(121, 23);
             this.TypeDriveText.TabIndex = 23;
@@ -300,7 +303,7 @@
             "Механическая",
             "Автомат",
             "Робот"});
-            this.GearBoxText.Location = new System.Drawing.Point(115, 330);
+            this.GearBoxText.Location = new System.Drawing.Point(115, 312);
             this.GearBoxText.Name = "GearBoxText";
             this.GearBoxText.Size = new System.Drawing.Size(121, 23);
             this.GearBoxText.TabIndex = 24;
@@ -312,14 +315,14 @@
             this.MotorText.Items.AddRange(new object[] {
             "Бензиновый",
             "Дизельный"});
-            this.MotorText.Location = new System.Drawing.Point(115, 368);
+            this.MotorText.Location = new System.Drawing.Point(115, 346);
             this.MotorText.Name = "MotorText";
             this.MotorText.Size = new System.Drawing.Size(121, 23);
             this.MotorText.TabIndex = 25;
             // 
             // ClearFormButton
             // 
-            this.ClearFormButton.Location = new System.Drawing.Point(12, 426);
+            this.ClearFormButton.Location = new System.Drawing.Point(7, 457);
             this.ClearFormButton.Name = "ClearFormButton";
             this.ClearFormButton.Size = new System.Drawing.Size(98, 23);
             this.ClearFormButton.TabIndex = 26;
@@ -329,7 +332,7 @@
             // 
             // SaveAdvButton
             // 
-            this.SaveAdvButton.Location = new System.Drawing.Point(482, 426);
+            this.SaveAdvButton.Location = new System.Drawing.Point(484, 457);
             this.SaveAdvButton.Name = "SaveAdvButton";
             this.SaveAdvButton.Size = new System.Drawing.Size(174, 23);
             this.SaveAdvButton.TabIndex = 27;
@@ -337,12 +340,30 @@
             this.SaveAdvButton.UseVisualStyleBackColor = true;
             this.SaveAdvButton.Click += new System.EventHandler(this.SaveAdvButton_Click);
             // 
+            // PriceLabel
+            // 
+            this.PriceLabel.AutoSize = true;
+            this.PriceLabel.Location = new System.Drawing.Point(70, 383);
+            this.PriceLabel.Name = "PriceLabel";
+            this.PriceLabel.Size = new System.Drawing.Size(35, 15);
+            this.PriceLabel.TabIndex = 28;
+            this.PriceLabel.Text = "Цена";
+            // 
+            // PriceText
+            // 
+            this.PriceText.Location = new System.Drawing.Point(115, 380);
+            this.PriceText.Name = "PriceText";
+            this.PriceText.Size = new System.Drawing.Size(121, 23);
+            this.PriceText.TabIndex = 29;
+            // 
             // CreateAdvertForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(673, 461);
+            this.ClientSize = new System.Drawing.Size(670, 492);
+            this.Controls.Add(this.PriceText);
+            this.Controls.Add(this.PriceLabel);
             this.Controls.Add(this.SaveAdvButton);
             this.Controls.Add(this.ClearFormButton);
             this.Controls.Add(this.MotorText);
@@ -413,5 +434,7 @@
         private ComboBox MotorText;
         private Button ClearFormButton;
         private Button SaveAdvButton;
+        private Label PriceLabel;
+        private TextBox PriceText;
     }
 }

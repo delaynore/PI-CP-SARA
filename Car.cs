@@ -22,6 +22,7 @@ namespace MyApp
         {
             Brand = brand;
             Model = model;
+            YearRelease = yearRelease;
             KmAge = kmAge;
             Engine = engine;
             GearBox = gearBox;

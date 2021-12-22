@@ -18,6 +18,8 @@ namespace MyApp
         private SqlConnection? sqlConnection = null;
         private string? ImagePath = null;
         private Form parentForm;
+        private string title = "Справка";
+        private string info = ""; // написать текст
         public CreateAdvertForm(Form form)
         {
             InitializeComponent();
@@ -61,7 +63,18 @@ namespace MyApp
                 }
                 if (sqlConnection.State == ConnectionState.Open)
                 {
-
+                    var adv = new Advertisiment(new Car(BrandText.Text,
+                        ModelText.Text,
+                        int.Parse(YearsComboBox.Text),
+                        Convert.ToInt32(KmAgeText.Text),
+                        MotorText.Text,
+                        GearBoxText.Text,
+                        BodyComboBox.Text,
+                        SteeringWheelText.Text),
+                        Convert.ToInt32(PriceText.Text),
+                        Status.OnSale,
+                        new Bitmap(ImageCar.Image)
+                        );
                     sqlConnection.Close();
 
                 }
@@ -78,7 +91,8 @@ namespace MyApp
                 || KmAgeText.Text == null || SteeringWheelText.Text == null
                 || TypeDriveText.Text == null || GearBoxText.Text == null
                 || MotorText.Text == null || ImagePath == null
-                || TextAboutCar.Text == null) return false;
+                || TextAboutCar.Text == null || TextAboutCar.Text == null 
+                || PriceText.Text == null) return false;
             return true;
         }
         private void ClearFormButton_Click(object sender, EventArgs e)
@@ -95,6 +109,7 @@ namespace MyApp
             ImagePath = null;
             ImageCar.Image = null;
             TextAboutCar.Text = null;
+            PriceText.Text = null;
         }
 
         private void OpenFileDialogButton_Click(object sender, EventArgs e)
@@ -112,6 +127,12 @@ namespace MyApp
         {
             ImageCar.Image = null;
             ImagePath = null;
+        }
+
+        private void InfoCreateAdvButton_Click(object sender, EventArgs e)
+        {
+            var formInfo = new Information(title, info);
+            formInfo.ShowDialog();
         }
     }
 }
