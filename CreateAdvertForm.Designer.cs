@@ -244,6 +244,8 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
+            "Внедорожник",
+            "Кабриолет",
             "Купе",
             "Седан",
             "Универсал",
