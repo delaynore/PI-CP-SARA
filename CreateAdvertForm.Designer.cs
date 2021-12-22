@@ -45,16 +45,16 @@
             this.GearBoxLabel = new System.Windows.Forms.Label();
             this.MotorLabel = new System.Windows.Forms.Label();
             this.AboutCarLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TextAboutCar = new System.Windows.Forms.TextBox();
+            this.BrandText = new System.Windows.Forms.TextBox();
+            this.ModelText = new System.Windows.Forms.TextBox();
             this.YearsComboBox = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.BodyComboBox = new System.Windows.Forms.ComboBox();
+            this.KmAgeText = new System.Windows.Forms.TextBox();
+            this.SteeringWheelText = new System.Windows.Forms.ComboBox();
+            this.TypeDriveText = new System.Windows.Forms.ComboBox();
+            this.GearBoxText = new System.Windows.Forms.ComboBox();
+            this.MotorText = new System.Windows.Forms.ComboBox();
             this.ClearFormButton = new System.Windows.Forms.Button();
             this.SaveAdvButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ImageCar)).BeginInit();
@@ -78,6 +78,7 @@
             this.OpenFileDialogButton.TabIndex = 1;
             this.OpenFileDialogButton.Text = "Загрузить";
             this.OpenFileDialogButton.UseVisualStyleBackColor = true;
+            this.OpenFileDialogButton.Click += new System.EventHandler(this.OpenFileDialogButton_Click);
             // 
             // DeletePictureButton
             // 
@@ -87,6 +88,7 @@
             this.DeletePictureButton.TabIndex = 2;
             this.DeletePictureButton.Text = "Удалить фото";
             this.DeletePictureButton.UseVisualStyleBackColor = true;
+            this.DeletePictureButton.Click += new System.EventHandler(this.DeletePictureButton_Click);
             // 
             // BackToMainFormButton
             // 
@@ -192,7 +194,7 @@
             // MotorLabel
             // 
             this.MotorLabel.AutoSize = true;
-            this.MotorLabel.Location = new System.Drawing.Point(8, 368);
+            this.MotorLabel.Location = new System.Drawing.Point(8, 372);
             this.MotorLabel.Name = "MotorLabel";
             this.MotorLabel.Size = new System.Drawing.Size(63, 15);
             this.MotorLabel.TabIndex = 14;
@@ -207,31 +209,32 @@
             this.AboutCarLabel.TabIndex = 15;
             this.AboutCarLabel.Text = "Состояние";
             // 
-            // textBox1
+            // TextAboutCar
             // 
-            this.textBox1.Location = new System.Drawing.Point(317, 314);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Расскажите о машине";
-            this.textBox1.Size = new System.Drawing.Size(339, 78);
-            this.textBox1.TabIndex = 16;
+            this.TextAboutCar.Location = new System.Drawing.Point(317, 314);
+            this.TextAboutCar.Multiline = true;
+            this.TextAboutCar.Name = "TextAboutCar";
+            this.TextAboutCar.PlaceholderText = "Расскажите о машине";
+            this.TextAboutCar.Size = new System.Drawing.Size(339, 78);
+            this.TextAboutCar.TabIndex = 16;
             // 
-            // textBox2
+            // BrandText
             // 
-            this.textBox2.Location = new System.Drawing.Point(115, 76);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(158, 23);
-            this.textBox2.TabIndex = 17;
+            this.BrandText.Location = new System.Drawing.Point(115, 76);
+            this.BrandText.Name = "BrandText";
+            this.BrandText.Size = new System.Drawing.Size(158, 23);
+            this.BrandText.TabIndex = 17;
             // 
-            // textBox3
+            // ModelText
             // 
-            this.textBox3.Location = new System.Drawing.Point(115, 117);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(158, 23);
-            this.textBox3.TabIndex = 18;
+            this.ModelText.Location = new System.Drawing.Point(115, 117);
+            this.ModelText.Name = "ModelText";
+            this.ModelText.Size = new System.Drawing.Size(158, 23);
+            this.ModelText.TabIndex = 18;
             // 
             // YearsComboBox
             // 
+            this.YearsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.YearsComboBox.FormattingEnabled = true;
             this.YearsComboBox.Location = new System.Drawing.Point(115, 151);
             this.YearsComboBox.Name = "YearsComboBox";
@@ -240,74 +243,79 @@
             this.YearsComboBox.TabIndex = 19;
             this.YearsComboBox.SelectedIndexChanged += new System.EventHandler(this.YearsComboBox_SelectedIndexChanged);
             // 
-            // comboBox1
+            // BodyComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.BodyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.BodyComboBox.FormattingEnabled = true;
+            this.BodyComboBox.Items.AddRange(new object[] {
             "Внедорожник",
             "Кабриолет",
             "Купе",
             "Седан",
             "Универсал",
             "Хетчбек"});
-            this.comboBox1.Location = new System.Drawing.Point(115, 188);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
-            this.comboBox1.Sorted = true;
-            this.comboBox1.TabIndex = 20;
+            this.BodyComboBox.Location = new System.Drawing.Point(115, 188);
+            this.BodyComboBox.Name = "BodyComboBox";
+            this.BodyComboBox.Size = new System.Drawing.Size(121, 23);
+            this.BodyComboBox.Sorted = true;
+            this.BodyComboBox.TabIndex = 20;
             // 
-            // textBox4
+            // KmAgeText
             // 
-            this.textBox4.Location = new System.Drawing.Point(115, 221);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(121, 23);
-            this.textBox4.TabIndex = 21;
+            this.KmAgeText.Location = new System.Drawing.Point(115, 221);
+            this.KmAgeText.Name = "KmAgeText";
+            this.KmAgeText.Size = new System.Drawing.Size(121, 23);
+            this.KmAgeText.TabIndex = 21;
             // 
-            // comboBox2
+            // SteeringWheelText
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.SteeringWheelText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SteeringWheelText.FormattingEnabled = true;
+            this.SteeringWheelText.Items.AddRange(new object[] {
             "Левый",
             "Правый"});
-            this.comboBox2.Location = new System.Drawing.Point(115, 257);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 23);
-            this.comboBox2.TabIndex = 22;
+            this.SteeringWheelText.Location = new System.Drawing.Point(115, 257);
+            this.SteeringWheelText.Name = "SteeringWheelText";
+            this.SteeringWheelText.Size = new System.Drawing.Size(121, 23);
+            this.SteeringWheelText.TabIndex = 22;
             // 
-            // comboBox3
+            // TypeDriveText
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.TypeDriveText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TypeDriveText.FormattingEnabled = true;
+            this.TypeDriveText.Items.AddRange(new object[] {
             "Передний",
             "Задний",
             "Полный"});
-            this.comboBox3.Location = new System.Drawing.Point(115, 295);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 23);
-            this.comboBox3.TabIndex = 23;
+            this.TypeDriveText.Location = new System.Drawing.Point(115, 295);
+            this.TypeDriveText.Name = "TypeDriveText";
+            this.TypeDriveText.Size = new System.Drawing.Size(121, 23);
+            this.TypeDriveText.TabIndex = 23;
             // 
-            // comboBox4
+            // GearBoxText
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
+            this.GearBoxText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GearBoxText.FormattingEnabled = true;
+            this.GearBoxText.Items.AddRange(new object[] {
             "Механическая",
             "Автомат",
             "Робот"});
-            this.comboBox4.Location = new System.Drawing.Point(115, 330);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 23);
-            this.comboBox4.TabIndex = 24;
+            this.GearBoxText.Location = new System.Drawing.Point(115, 330);
+            this.GearBoxText.Name = "GearBoxText";
+            this.GearBoxText.Size = new System.Drawing.Size(121, 23);
+            this.GearBoxText.TabIndex = 24;
             // 
-            // comboBox5
+            // MotorText
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Items.AddRange(new object[] {
+            this.MotorText.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.MotorText.FormattingEnabled = true;
+            this.MotorText.Items.AddRange(new object[] {
             "Бензиновый",
             "Дизельный"});
-            this.comboBox5.Location = new System.Drawing.Point(115, 368);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(121, 23);
-            this.comboBox5.TabIndex = 25;
+            this.MotorText.Location = new System.Drawing.Point(115, 368);
+            this.MotorText.Name = "MotorText";
+            this.MotorText.Size = new System.Drawing.Size(121, 23);
+            this.MotorText.TabIndex = 25;
             // 
             // ClearFormButton
             // 
@@ -317,6 +325,7 @@
             this.ClearFormButton.TabIndex = 26;
             this.ClearFormButton.Text = "Очистить";
             this.ClearFormButton.UseVisualStyleBackColor = true;
+            this.ClearFormButton.Click += new System.EventHandler(this.ClearFormButton_Click);
             // 
             // SaveAdvButton
             // 
@@ -336,16 +345,16 @@
             this.ClientSize = new System.Drawing.Size(673, 461);
             this.Controls.Add(this.SaveAdvButton);
             this.Controls.Add(this.ClearFormButton);
-            this.Controls.Add(this.comboBox5);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.MotorText);
+            this.Controls.Add(this.GearBoxText);
+            this.Controls.Add(this.TypeDriveText);
+            this.Controls.Add(this.SteeringWheelText);
+            this.Controls.Add(this.KmAgeText);
+            this.Controls.Add(this.BodyComboBox);
             this.Controls.Add(this.YearsComboBox);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.ModelText);
+            this.Controls.Add(this.BrandText);
+            this.Controls.Add(this.TextAboutCar);
             this.Controls.Add(this.AboutCarLabel);
             this.Controls.Add(this.MotorLabel);
             this.Controls.Add(this.GearBoxLabel);
@@ -365,6 +374,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreateAdvertForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Создать обьявление";
             this.Load += new System.EventHandler(this.CreateAdvertForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ImageCar)).EndInit();
@@ -391,16 +401,16 @@
         private Label GearBoxLabel;
         private Label MotorLabel;
         private Label AboutCarLabel;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox TextAboutCar;
+        private TextBox BrandText;
+        private TextBox ModelText;
         private ComboBox YearsComboBox;
-        private ComboBox comboBox1;
-        private TextBox textBox4;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private ComboBox comboBox4;
-        private ComboBox comboBox5;
+        private ComboBox BodyComboBox;
+        private TextBox KmAgeText;
+        private ComboBox SteeringWheelText;
+        private ComboBox TypeDriveText;
+        private ComboBox GearBoxText;
+        private ComboBox MotorText;
         private Button ClearFormButton;
         private Button SaveAdvButton;
     }

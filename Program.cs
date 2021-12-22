@@ -9,7 +9,7 @@ namespace MyApp
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new CreateAdvertForm());
+            Application.Run(new MainForm());
         }
     }
 }
