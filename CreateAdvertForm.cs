@@ -21,5 +21,19 @@ namespace MyApp
         {
 
         }
+
+        private void CreateAdvertForm_Load(object sender, EventArgs e)
+        {
+            DateTime dateTime = DateTime.Now;
+            for (int i = 1950; i < dateTime.Year; i++)
+            {
+                YearsComboBox.Items.Add(i);
+            }
+        }
+
+        private void YearsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
