@@ -326,6 +326,7 @@
             this.SaveAdvButton.TabIndex = 27;
             this.SaveAdvButton.Text = "Сохранить";
             this.SaveAdvButton.UseVisualStyleBackColor = true;
+            this.SaveAdvButton.Click += new System.EventHandler(this.SaveAdvButton_Click);
             // 
             // CreateAdvertForm
             // 

@@ -23,7 +23,6 @@ namespace MyApp
     enum Status
     {
         OnSale,
-        Booked,
         Sold
     }
 }
