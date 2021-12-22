@@ -12,6 +12,9 @@ namespace MyApp
 {
     public partial class MainForm : Form
     {
+        private string title = "О приложении";
+        private string info = ""; // написать инфо текст
+
         public MainForm()
         {
             InitializeComponent();
@@ -45,7 +48,7 @@ namespace MyApp
 
         private void InfoButton_Click(object sender, EventArgs e)
         {
-            var formInfo = new Information("О приложении", "В данном приложении можно");
+            var formInfo = new Information(title, info);
             formInfo.ShowDialog();
         }
     }
