@@ -30,5 +30,23 @@ namespace MyApp
         {
 
         }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void CreateAdvertButton_Click(object sender, EventArgs e)
+        {
+            var createAdvForm = new CreateAdvertForm(this);
+            createAdvForm.Show();
+            this.Hide();
+        }
+
+        private void InfoButton_Click(object sender, EventArgs e)
+        {
+            var formInfo = new Information("О приложении", "В данном приложении можно");
+            formInfo.ShowDialog();
+        }
     }
 }

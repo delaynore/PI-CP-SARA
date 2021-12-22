@@ -58,6 +58,7 @@
             this.CreateAdvertButton.TabIndex = 1;
             this.CreateAdvertButton.Text = "Создать обьявление";
             this.CreateAdvertButton.UseVisualStyleBackColor = false;
+            this.CreateAdvertButton.Click += new System.EventHandler(this.CreateAdvertButton_Click);
             // 
             // pictureBox1
             // 
@@ -80,6 +81,7 @@
             this.ExitButton.TabIndex = 3;
             this.ExitButton.Text = "Выход";
             this.ExitButton.UseVisualStyleBackColor = false;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // InfoButton
             // 
@@ -90,6 +92,7 @@
             this.InfoButton.TabIndex = 4;
             this.InfoButton.Text = "О приложении";
             this.InfoButton.UseVisualStyleBackColor = false;
+            this.InfoButton.Click += new System.EventHandler(this.InfoButton_Click);
             // 
             // MainForm
             // 
