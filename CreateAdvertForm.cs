@@ -222,5 +222,10 @@ namespace MyApp
             var formInfo = new Information(title, info);
             formInfo.ShowDialog();
         }
+
+        private void MotorText_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -314,11 +314,13 @@
             this.MotorText.FormattingEnabled = true;
             this.MotorText.Items.AddRange(new object[] {
             "Бензиновый",
-            "Дизельный"});
+            "Дизельный",
+            "Электрический"});
             this.MotorText.Location = new System.Drawing.Point(115, 346);
             this.MotorText.Name = "MotorText";
             this.MotorText.Size = new System.Drawing.Size(121, 23);
             this.MotorText.TabIndex = 25;
+            this.MotorText.SelectedIndexChanged += new System.EventHandler(this.MotorText_SelectedIndexChanged);
             // 
             // ClearFormButton
             // 
