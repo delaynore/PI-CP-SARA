@@ -13,11 +13,12 @@ using System.Configuration;
 
 namespace MyApp
 {
-    public partial class CreateAdvertForm : Form
+    public partial class CreateAdvertForm : BorderLessForm
     {
         private SqlConnection? sqlConnection = null;
         private string? ImagePath = null;
         private Form parentForm;
+        #region
         private string title = "Справка";
         private string info = 
             "В данном окне у вас есть возможность сделать собственное объявление и сохранить его в базе данных." +
@@ -39,9 +40,13 @@ namespace MyApp
             "\nКнопка 'Загрузить'. С помощью данной кнопки у вас есть возможность загрузить фото автомобиля." +
             "\nКнопка 'Удалить фото' удаляет фото автомобиля" +
             "\nКнопка 'Сохранить' сохраняет информацию в базу данных. (Для сохранения должны быть заполнены все поля)\n" +
-            "  "; 
+            "  ";
+        #endregion 
         public CreateAdvertForm(Form form)
         {
+            HeaderBackColor = Color.White;
+            Moveable = true;
+            Resizeable = false;
             InitializeComponent();
             parentForm = form;
         }
@@ -226,6 +231,17 @@ namespace MyApp
         private void MotorText_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Close();
+            parentForm.Close();
         }
     }
 }

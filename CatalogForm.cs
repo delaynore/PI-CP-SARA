@@ -12,15 +12,17 @@ using System.Configuration;
 
 namespace MyApp
 {
-    public partial class CatalogForm : Form
+    public partial class CatalogForm : BorderLessForm
     {
         private Form parentForm;
-        private SqlConnection sqlConnection = null;
-        private SqlCommandBuilder sqlCommandBuilder = null;
-        private SqlDataAdapter dataAdapter = null;
-        private DataSet dataSet = null;
+        private SqlConnection? sqlConnection = null;
+        private SqlCommandBuilder? sqlCommandBuilder = null;
+        private SqlDataAdapter? dataAdapter = null;
+        private DataSet? dataSet = null;
         public CatalogForm(Form form)
         {
+            HeaderBackColor = Color.White;
+            Moveable = true;
             InitializeComponent();
             parentForm = form;
         }

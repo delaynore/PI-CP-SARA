@@ -61,6 +61,7 @@
             this.Controls.Add(this.LabelInfo);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Information";
             this.Load += new System.EventHandler(this.Information_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

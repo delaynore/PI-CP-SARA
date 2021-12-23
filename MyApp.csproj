@@ -26,12 +26,4 @@
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" /> 
 	</ItemGroup>
-	<ItemGroup>
-	  <None Update="DataBase.mdf">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </None>
-	  <None Update="DataBase_log.ldf">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </None>
-	</ItemGroup>
 </Project>
