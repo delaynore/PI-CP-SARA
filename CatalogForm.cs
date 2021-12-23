@@ -47,17 +47,54 @@ namespace MyApp
         {
             try
             {
-                dataAdapter = new SqlDataAdapter("SELECT Brand as 'Марка', Model as 'Модель', Year as 'Год выпуска', Price as 'Цена' FROM Adverts", sqlConnection);
+                dataAdapter = new SqlDataAdapter("SELECT Brand as 'Марка', Model as 'Модель', Year as 'Год выпуска', Price as 'Цена', 'Command' as [Command] FROM Adverts", sqlConnection);
                 sqlCommandBuilder = new SqlCommandBuilder(dataAdapter);
                 dataSet = new DataSet();
                 dataAdapter.Fill(dataSet, "Adverts");
                 dataGridView1.DataSource = dataSet.Tables["Adverts"];
 
+              for(int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    DataGridViewLinkCell linkcell = new DataGridViewLinkCell();
+
+                    dataGridView1[4, i] = linkcell;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ReloadData()
+        {
+            try
+            {
+                dataSet.Tables["Adverts"].Clear();
+                dataAdapter.Fill(dataSet, "Adverts");
+                dataGridView1.DataSource = dataSet.Tables["Adverts"];
+
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    DataGridViewLinkCell linkcell = new DataGridViewLinkCell();
+
+                    dataGridView1[4, i] = linkcell;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void toolStripUpdate_Click(object sender, EventArgs e)
+        {
+            ReloadData();
         }
     }
 }

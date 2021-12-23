@@ -52,6 +52,7 @@
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(939, 420);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // toolStrip
             // 
@@ -74,6 +75,7 @@
             this.toolStripUpdate.Name = "toolStripUpdate";
             this.toolStripUpdate.Size = new System.Drawing.Size(65, 26);
             this.toolStripUpdate.Text = "Обновить";
+            this.toolStripUpdate.Click += new System.EventHandler(this.toolStripUpdate_Click);
             // 
             // toolStripSeparator1
             // 
