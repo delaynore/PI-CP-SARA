@@ -45,7 +45,7 @@ namespace MyApp
         {
             try
             {
-                dataAdapter = new SqlDataAdapter("SELECT Brand, Model, Year, Price, SaleStatus FROM Adverts", sqlConnection);
+                dataAdapter = new SqlDataAdapter("SELECT Brand as 'Марка', Model as 'Модель', Year as 'Год выпуска', Price as 'Цена' FROM Adverts", sqlConnection);
                 sqlCommandBuilder = new SqlCommandBuilder(dataAdapter);
                 dataSet = new DataSet();
                 dataAdapter.Fill(dataSet, "Adverts");
