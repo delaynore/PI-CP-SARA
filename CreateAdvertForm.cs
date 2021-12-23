@@ -88,57 +88,60 @@ namespace MyApp
                 }
                 if (sqlConnection.State == ConnectionState.Open)
                 {
-                    CopyImageToProjectFolder();
-                    var sqlCommand = new SqlCommand("INSERT INTO [Adverts]" +
-                        " (Brand, Model, Year, Engine, SteeringWheel, GearBox, Type, Price, SaleStatus, ImagePath)" +
-                        "VALUES(@Brand, @Model, @Year, @Engine, @SteeringWheel, @GearBox, @Type, @Price, @SaleStatus, @ImagePath)", sqlConnection);
-                    var adv = new Advertisiment(new Car(BrandText.Text,
-                        ModelText.Text,
-                        int.Parse(YearsComboBox.Text),
-                        Convert.ToInt32(KmAgeText.Text),
-                        MotorText.Text,
-                        GearBoxText.Text,
-                        BodyComboBox.Text,
-                        SteeringWheelText.Text),
-                        Convert.ToInt32(PriceText.Text),
-                        Status.OnSale,
-                        new Bitmap(ImageCar.Image)
-                        );
-                    sqlCommand.Parameters.AddWithValue("@Brand", adv.Car.Brand);
-                    sqlCommand.Parameters.AddWithValue("@Model", adv.Car.Model);
-                    sqlCommand.Parameters.AddWithValue("@Year", adv.Car.YearRelease);
-                    sqlCommand.Parameters.AddWithValue("@Engine", adv.Car.Engine);
-                    sqlCommand.Parameters.AddWithValue("@SteeringWheel", adv.Car.SteeringWheel);
-                    sqlCommand.Parameters.AddWithValue("@GearBox", adv.Car.GearBox);
-                    sqlCommand.Parameters.AddWithValue("@Type", adv.Car.Type);
-                    sqlCommand.Parameters.AddWithValue("@Price", adv.Price);
-                    sqlCommand.Parameters.AddWithValue("@SaleStatus", adv.SaleStatus.ToString());
-                    sqlCommand.Parameters.AddWithValue("@ImagePath", ImagePath);
-                    try
+
+                    if (CopyImageToProjectFolder() == true)
                     {
-                        await sqlCommand.ExecuteNonQueryAsync();
-                        var result = MessageBox.Show("Обьявление успешно создано\n Хотите создать еще одно обьявление?", "Уведомление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                        if (result == DialogResult.OK)
+                        var sqlCommand = new SqlCommand("INSERT INTO [Adverts]" +
+                            " (Brand, Model, Year, Engine, SteeringWheel, GearBox, Type, Price, SaleStatus, ImagePath)" +
+                            "VALUES(@Brand, @Model, @Year, @Engine, @SteeringWheel, @GearBox, @Type, @Price, @SaleStatus, @ImagePath)", sqlConnection);
+                        var adv = new Advertisiment(new Car(BrandText.Text,
+                            ModelText.Text,
+                            int.Parse(YearsComboBox.Text),
+                            Convert.ToInt32(KmAgeText.Text),
+                            MotorText.Text,
+                            GearBoxText.Text,
+                            BodyComboBox.Text,
+                            SteeringWheelText.Text),
+                            Convert.ToInt32(PriceText.Text),
+                            Status.OnSale,
+                            new Bitmap(ImageCar.Image)
+                            );
+                        sqlCommand.Parameters.AddWithValue("@Brand", adv.Car.Brand);
+                        sqlCommand.Parameters.AddWithValue("@Model", adv.Car.Model);
+                        sqlCommand.Parameters.AddWithValue("@Year", adv.Car.YearRelease);
+                        sqlCommand.Parameters.AddWithValue("@Engine", adv.Car.Engine);
+                        sqlCommand.Parameters.AddWithValue("@SteeringWheel", adv.Car.SteeringWheel);
+                        sqlCommand.Parameters.AddWithValue("@GearBox", adv.Car.GearBox);
+                        sqlCommand.Parameters.AddWithValue("@Type", adv.Car.Type);
+                        sqlCommand.Parameters.AddWithValue("@Price", adv.Price);
+                        sqlCommand.Parameters.AddWithValue("@SaleStatus", adv.SaleStatus.ToString());
+                        sqlCommand.Parameters.AddWithValue("@ImagePath", ImagePath);
+                        try
                         {
-                            ClearFormButton_Click(sender, e);
+                            await sqlCommand.ExecuteNonQueryAsync();
+                            var result = MessageBox.Show("Обьявление успешно создано\n Хотите создать еще одно обьявление?", "Уведомление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                            if (result == DialogResult.OK)
+                            {
+                                ClearFormButton_Click(sender, e);
+                            }
+                            else
+                            {
+                                BackToMainFormButton_Click(sender, e);
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            BackToMainFormButton_Click(sender, e);
+                            MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+                        sqlConnection.Close();
                     }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }       
                     sqlConnection.Close();
-                    
 
                 }
             }
             
         }
-        private void CopyImageToProjectFolder()
+        private bool CopyImageToProjectFolder()
         {
             var folderPath = Path.GetDirectoryName(Application.ExecutablePath);
             var dir = new DirectoryInfo($"{folderPath}\\images");
@@ -151,10 +154,12 @@ namespace MyApp
                 string dest = string.Format($"{dir.FullName}\\{Path.GetFileName(ImagePath)}");
                 File.Copy(ImagePath, dest);
                 ImagePath = $".\\image\\{Path.GetFileName(ImagePath)}";
+                return true;
             }
             catch(Exception ex)
             {
                 MessageBox.Show(String.Format("Картинка с таким именем существует, измените название"), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
         private bool AllFieldsFilledCorrectly()

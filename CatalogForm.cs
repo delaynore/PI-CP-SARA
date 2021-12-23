@@ -97,12 +97,12 @@ namespace MyApp
 
                     if (task == "Delete")
                     {
-                        if (MessageBox.Show("Удалиь эту строку?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes);
+                        if (MessageBox.Show("Удалиь эту строку?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)==DialogResult.OK);
                         {
                             int rowIndex = e.RowIndex;
                             dataGridView1.Rows.RemoveAt(rowIndex);
                             dataSet.Tables["Adverts"].Rows[rowIndex].Delete();
-                            SqlCommand command = new SqlCommand($"DELETE FROM Adverts WHERE Id ={rowIndex}",sqlConnection);
+                            //SqlCommand command = new SqlCommand($"DELETE FROM Adverts WHERE Id ={rowIndex}",sqlConnection); //Работает без этой строчки кода (до этого не работало, причина неизвестна)
                             dataAdapter.Update(dataSet, "Adverts");
                         }
                         ReloadData();
