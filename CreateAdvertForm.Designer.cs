@@ -206,7 +206,7 @@
             // AboutCarLabel
             // 
             this.AboutCarLabel.AutoSize = true;
-            this.AboutCarLabel.Location = new System.Drawing.Point(317, 296);
+            this.AboutCarLabel.Location = new System.Drawing.Point(317, 265);
             this.AboutCarLabel.Name = "AboutCarLabel";
             this.AboutCarLabel.Size = new System.Drawing.Size(66, 15);
             this.AboutCarLabel.TabIndex = 15;
@@ -214,11 +214,12 @@
             // 
             // TextAboutCar
             // 
-            this.TextAboutCar.Location = new System.Drawing.Point(317, 314);
+            this.TextAboutCar.Location = new System.Drawing.Point(317, 283);
             this.TextAboutCar.Multiline = true;
             this.TextAboutCar.Name = "TextAboutCar";
             this.TextAboutCar.PlaceholderText = "Расскажите о машине";
-            this.TextAboutCar.Size = new System.Drawing.Size(339, 78);
+            this.TextAboutCar.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TextAboutCar.Size = new System.Drawing.Size(339, 120);
             this.TextAboutCar.TabIndex = 16;
             // 
             // BrandText
@@ -242,7 +243,6 @@
             this.YearsComboBox.Location = new System.Drawing.Point(115, 142);
             this.YearsComboBox.Name = "YearsComboBox";
             this.YearsComboBox.Size = new System.Drawing.Size(158, 23);
-            this.YearsComboBox.Sorted = true;
             this.YearsComboBox.TabIndex = 19;
             this.YearsComboBox.SelectedIndexChanged += new System.EventHandler(this.YearsComboBox_SelectedIndexChanged);
             // 
@@ -322,9 +322,9 @@
             // 
             // ClearFormButton
             // 
-            this.ClearFormButton.Location = new System.Drawing.Point(7, 457);
+            this.ClearFormButton.Location = new System.Drawing.Point(8, 416);
             this.ClearFormButton.Name = "ClearFormButton";
-            this.ClearFormButton.Size = new System.Drawing.Size(98, 23);
+            this.ClearFormButton.Size = new System.Drawing.Size(128, 24);
             this.ClearFormButton.TabIndex = 26;
             this.ClearFormButton.Text = "Очистить";
             this.ClearFormButton.UseVisualStyleBackColor = true;
@@ -332,9 +332,9 @@
             // 
             // SaveAdvButton
             // 
-            this.SaveAdvButton.Location = new System.Drawing.Point(484, 457);
+            this.SaveAdvButton.Location = new System.Drawing.Point(480, 416);
             this.SaveAdvButton.Name = "SaveAdvButton";
-            this.SaveAdvButton.Size = new System.Drawing.Size(174, 23);
+            this.SaveAdvButton.Size = new System.Drawing.Size(176, 24);
             this.SaveAdvButton.TabIndex = 27;
             this.SaveAdvButton.Text = "Сохранить";
             this.SaveAdvButton.UseVisualStyleBackColor = true;
@@ -361,7 +361,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(670, 492);
+            this.ClientSize = new System.Drawing.Size(670, 452);
             this.Controls.Add(this.PriceText);
             this.Controls.Add(this.PriceLabel);
             this.Controls.Add(this.SaveAdvButton);
@@ -392,8 +392,9 @@
             this.Controls.Add(this.DeletePictureButton);
             this.Controls.Add(this.OpenFileDialogButton);
             this.Controls.Add(this.ImageCar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "CreateAdvertForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Создать обьявление";

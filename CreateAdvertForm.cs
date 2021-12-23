@@ -35,7 +35,7 @@ namespace MyApp
         private void CreateAdvertForm_Load(object sender, EventArgs e)
         {
             DateTime dateTime = DateTime.Now;
-            for (int i = 1950; i < dateTime.Year + 1; i++)
+            for (int i = dateTime.Year; i >= 1950; i--)
             {
                 YearsComboBox.Items.Add(i);
             }
@@ -48,14 +48,14 @@ namespace MyApp
 
         }
 
-        private void SaveAdvButton_Click(object sender, EventArgs e)
+        private async void SaveAdvButton_Click(object sender, EventArgs e)
         {
-            if (AllFieldsAreFilled())
+            if (AllFieldsAreFilled() && AllFieldsFilledCorrectly())
             {
                 sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DataBaseConnectionString"].ConnectionString);
                 try
                 {
-                    sqlConnection.Open();
+                    await sqlConnection.OpenAsync();
                 }
                 catch (Exception ex)
                 {
@@ -63,6 +63,10 @@ namespace MyApp
                 }
                 if (sqlConnection.State == ConnectionState.Open)
                 {
+                    CopyImageToProjectFolder();
+                    var sqlCommand = new SqlCommand("INSERT INTO [Adverts]" +
+                        " (Brand, Model, Year, Engine, SteeringWheel, GearBox, Type, Price, SaleStatus, ImagePath)" +
+                        "VALUES(@Brand, @Model, @Year, @Engine, @SteeringWheel, @GearBox, @Type, @Price, @SaleStatus, @ImagePath)", sqlConnection);
                     var adv = new Advertisiment(new Car(BrandText.Text,
                         ModelText.Text,
                         int.Parse(YearsComboBox.Text),
@@ -75,15 +79,75 @@ namespace MyApp
                         Status.OnSale,
                         new Bitmap(ImageCar.Image)
                         );
+                    sqlCommand.Parameters.AddWithValue("@Brand", adv.Car.Brand);
+                    sqlCommand.Parameters.AddWithValue("@Model", adv.Car.Model);
+                    sqlCommand.Parameters.AddWithValue("@Year", adv.Car.YearRelease);
+                    sqlCommand.Parameters.AddWithValue("@Engine", adv.Car.Engine);
+                    sqlCommand.Parameters.AddWithValue("@SteeringWheel", adv.Car.SteeringWheel);
+                    sqlCommand.Parameters.AddWithValue("@GearBox", adv.Car.GearBox);
+                    sqlCommand.Parameters.AddWithValue("@Type", adv.Car.Type);
+                    sqlCommand.Parameters.AddWithValue("@Price", adv.Price);
+                    sqlCommand.Parameters.AddWithValue("@SaleStatus", adv.SaleStatus.ToString());
+                    sqlCommand.Parameters.AddWithValue("@ImagePath", ImagePath);
+                    try
+                    {
+                        await sqlCommand.ExecuteNonQueryAsync();
+                        var result = MessageBox.Show("Обьявление успешно создано\n Хотите создать еще одно обьявление?", "Уведомление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        if (result == DialogResult.OK)
+                        {
+                            ClearFormButton_Click(sender, e);
+                        }
+                        else
+                        {
+                            BackToMainFormButton_Click(sender, e);
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }       
                     sqlConnection.Close();
+                    
 
                 }
             }
-            else
+            
+        }
+        private void CopyImageToProjectFolder()
+        {
+            var folderPath = Path.GetDirectoryName(Application.ExecutablePath);
+            var dir = new DirectoryInfo($"{folderPath}\\images");
+            if (!dir.Exists)
             {
-                MessageBox.Show("Не все поля заполнены"); // добавить
+                dir.Create();
+            }
+            try
+            {
+                string dest = string.Format($"{dir.FullName}\\{Path.GetFileName(ImagePath)}");
+                File.Copy(ImagePath, dest);
+                ImagePath = $".\\image\\{Path.GetFileName(ImagePath)}";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(String.Format("Картинка с таким именем существует, измените название"), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private bool AllFieldsFilledCorrectly()
+        {
+            int a;
+            if (!int.TryParse(KmAgeText.Text, out a))
+            {
+                MessageBox.Show(String.Format("В поле 'Пробег' дожно быть целое число"), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (!int.TryParse(PriceText.Text, out a))
+            {
+                MessageBox.Show(String.Format("В поле 'Цена' дожно быть целое число"), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
         private bool AllFieldsAreFilled()
         {
             if (BrandText.Text == null || ModelText.Text == null
@@ -91,8 +155,12 @@ namespace MyApp
                 || KmAgeText.Text == null || SteeringWheelText.Text == null
                 || TypeDriveText.Text == null || GearBoxText.Text == null
                 || MotorText.Text == null || ImagePath == null
-                || TextAboutCar.Text == null || TextAboutCar.Text == null 
-                || PriceText.Text == null) return false;
+                || TextAboutCar.Text == null || TextAboutCar.Text == null
+                || PriceText.Text == null)
+            {
+                MessageBox.Show("Не все поля заполнены", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             return true;
         }
         private void ClearFormButton_Click(object sender, EventArgs e)
