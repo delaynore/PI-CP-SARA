@@ -97,7 +97,7 @@ namespace MyApp
 
                     if (task == "Delete")
                     {
-                        if (MessageBox.Show("Удалиь эту строку?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)==DialogResult.OK);
+                        if (MessageBox.Show("Удалиь эту строку?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                         {
                             int rowIndex = e.RowIndex;
                             dataGridView1.Rows.RemoveAt(rowIndex);
@@ -120,6 +120,12 @@ namespace MyApp
         private void toolStripUpdate_Click(object sender, EventArgs e)
         {
             ReloadData();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Close();
+            parentForm.Show();
         }
     }
 }
