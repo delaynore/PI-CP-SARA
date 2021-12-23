@@ -47,7 +47,7 @@ namespace MyApp
         {
             try
             {
-                dataAdapter = new SqlDataAdapter("SELECT Brand as 'Марка', Model as 'Модель', Year as 'Год выпуска', Price as 'Цена', 'Command' as [Command] FROM Adverts", sqlConnection);
+                dataAdapter = new SqlDataAdapter("SELECT Id as 'Номер объявления', Brand as 'Марка', Model as 'Модель', Year as 'Год выпуска', Price as 'Цена', 'Delete' as [Delete] FROM Adverts", sqlConnection);
                 sqlCommandBuilder = new SqlCommandBuilder(dataAdapter);
                 dataSet = new DataSet();
                 dataAdapter.Fill(dataSet, "Adverts");
@@ -57,7 +57,7 @@ namespace MyApp
                 {
                     DataGridViewLinkCell linkcell = new DataGridViewLinkCell();
 
-                    dataGridView1[4, i] = linkcell;
+                    dataGridView1[5, i] = linkcell;
                 }
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace MyApp
                 {
                     DataGridViewLinkCell linkcell = new DataGridViewLinkCell();
 
-                    dataGridView1[4, i] = linkcell;
+                    dataGridView1[5, i] = linkcell;
                 }
             }
             catch (Exception ex)
@@ -89,7 +89,32 @@ namespace MyApp
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                if(e.ColumnIndex == 5)
+                {
+                    string task = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
 
+                    if (task == "Delete")
+                    {
+                        if (MessageBox.Show("Удалиь эту строку?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes);
+                        {
+                            int rowIndex = e.RowIndex;
+                            dataGridView1.Rows.RemoveAt(rowIndex);
+                            dataSet.Tables["Adverts"].Rows[rowIndex].Delete();
+                            SqlCommand command = new SqlCommand($"DELETE FROM Adverts WHERE Id ={rowIndex}",sqlConnection);
+                            dataAdapter.Update(dataSet, "Adverts");
+                        }
+                        ReloadData();
+                    }
+                    
+                }
+
+            }
+            catch
+            {
+
+            }
         }
 
         private void toolStripUpdate_Click(object sender, EventArgs e)
