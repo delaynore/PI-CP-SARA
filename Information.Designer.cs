@@ -37,26 +37,27 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::MyApp.Resource1.info;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(151, 161);
+            this.pictureBox1.Size = new System.Drawing.Size(170, 121);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // LabelInfo
             // 
+            this.LabelInfo.AutoSize = true;
             this.LabelInfo.Location = new System.Drawing.Point(169, 12);
             this.LabelInfo.Name = "LabelInfo";
-            this.LabelInfo.Size = new System.Drawing.Size(251, 161);
+            this.LabelInfo.Size = new System.Drawing.Size(0, 15);
             this.LabelInfo.TabIndex = 1;
             // 
             // Information
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(432, 191);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(504, 126);
             this.Controls.Add(this.LabelInfo);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -64,6 +65,7 @@
             this.Load += new System.EventHandler(this.Information_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
