@@ -47,6 +47,7 @@
             this.OpenButton.TabIndex = 0;
             this.OpenButton.Text = "Открыть";
             this.OpenButton.UseVisualStyleBackColor = false;
+            this.OpenButton.Click += new System.EventHandler(this.OpenButton_Click);
             // 
             // CreateAdvertButton
             // 

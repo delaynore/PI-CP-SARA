@@ -51,5 +51,12 @@ namespace MyApp
             var formInfo = new Information(title, info);
             formInfo.ShowDialog();
         }
+
+        private void OpenButton_Click(object sender, EventArgs e)
+        {
+            var catalogForm = new CatalogForm(this);
+            catalogForm.Show();
+            this.Hide();
+        }
     }
 }
