@@ -14,12 +14,14 @@ namespace MyApp
 {
     public partial class OpenAdvert : Form
     {
-           
-        public OpenAdvert(int index, SqlConnection sqlConnection, Form form)
+        private SqlConnection sqlConnection;
+        private int index;
+        public OpenAdvert(int indx, SqlConnection connection, Form form)
         {
             InitializeComponent();
-            Info(index,sqlConnection);
+            sqlConnection = connection;
             parrentForm = form;
+            index = indx;
         }
         private Form parrentForm;
         public void Info(int index, SqlConnection sqlConnection)
@@ -40,7 +42,14 @@ namespace MyApp
                 PriceText.Text = reader["Price"].ToString();
                 TextAboutCar.Text = reader["Description"].ToString();
                 StatusText.Text = reader["SaleStatus"].ToString();
-                ImageCar.Image = Image.FromFile(reader["ImagePath"].ToString());
+                try
+                {
+                    ImageCar.Image = Image.FromFile(reader["ImagePath"].ToString());
+                }
+                catch (Exception)
+                {
+                    ImageCar.Image = Resource1.mainIcon;
+                }
             }
             reader.Close();
         }
@@ -49,6 +58,27 @@ namespace MyApp
         {
             parrentForm.Show();
             this.Close();
+        }
+
+        private void OpenAdvert_Load(object sender, EventArgs e)
+        {
+            CnahgeStateContols();
+            Info(index, sqlConnection);
+        }
+        private void CnahgeStateContols()
+        {
+            BrandText.ReadOnly = !BrandText.ReadOnly;
+            ModelText.ReadOnly = !ModelText.ReadOnly;
+            YearText.ReadOnly = !YearText.ReadOnly;
+            BodyComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            KmAgeText.ReadOnly = !KmAgeText.ReadOnly;
+            //SteeringWheelText.ReadOnly = !SteeringWheelText.ReadOnly;
+            //TypeDriveText.ReadOnly = !TypeDriveText.ReadOnly;
+            //GearBoxText.ReadOnly = !GearBoxText.ReadOnly;
+            //MotorText.ReadOnly = !MotorText.ReadOnly;
+            PriceText.ReadOnly = !PriceText.ReadOnly;
+            StatusText.ReadOnly = !StatusText.ReadOnly;
+            TextAboutCar.ReadOnly = !TextAboutCar.ReadOnly;
         }
     }
 }

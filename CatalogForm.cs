@@ -70,15 +70,18 @@ namespace MyApp
         {
             try
             {
-                dataSet.Tables["Adverts"].Clear();
-                dataAdapter.Fill(dataSet, "Adverts");
-                dataGridView1.DataSource = dataSet.Tables["Adverts"];
-
-                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                if (dataSet != null)
                 {
-                    DataGridViewLinkCell linkcell = new DataGridViewLinkCell();
+                    dataSet.Tables["Adverts"].Clear();
+                    dataAdapter.Fill(dataSet, "Adverts");
+                    dataGridView1.DataSource = dataSet.Tables["Adverts"];
 
-                    dataGridView1[5, i] = linkcell;
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        DataGridViewLinkCell linkcell = new DataGridViewLinkCell();
+
+                        dataGridView1[5, i] = linkcell;
+                    }
                 }
             }
             catch (Exception ex)

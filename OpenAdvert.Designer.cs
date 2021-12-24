@@ -385,6 +385,7 @@
             this.Controls.Add(this.OpenFileDialogButton);
             this.Controls.Add(this.ImageCar);
             this.Name = "OpenAdvert";
+            this.Load += new System.EventHandler(this.OpenAdvert_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ImageCar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
