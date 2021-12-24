@@ -109,6 +109,12 @@ namespace MyApp
                     }
                     
                 }
+                else
+                {
+                    OpenAdvert openAdvert = new OpenAdvert(int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()),sqlConnection);
+                    //MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    openAdvert.Show();
+                }
 
             }
             catch
