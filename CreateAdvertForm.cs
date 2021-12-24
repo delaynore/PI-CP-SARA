@@ -92,30 +92,36 @@ namespace MyApp
                     if (CopyImageToProjectFolder() == true)
                     {
                         var sqlCommand = new SqlCommand("INSERT INTO [Adverts]" +
-                            " (Brand, Model, Year, Engine, SteeringWheel, GearBox, Type, Price, SaleStatus, ImagePath)" +
-                            "VALUES(@Brand, @Model, @Year, @Engine, @SteeringWheel, @GearBox, @Type, @Price, @SaleStatus, @ImagePath)", sqlConnection);
-                        var adv = new Advertisiment(new Car(BrandText.Text,
-                            ModelText.Text,
-                            int.Parse(YearsComboBox.Text),
-                            Convert.ToInt32(KmAgeText.Text),
-                            MotorText.Text,
-                            GearBoxText.Text,
-                            BodyComboBox.Text,
-                            SteeringWheelText.Text),
+                            " (Brand, Model, Year, Body, KmAge, SteeringWheel, TypeDrive, GearBox, Motor, Price, ImagePath, Description, SaleStatus)" +
+                            "VALUES(@Brand, @Model, @Year, @Body, @KmAge, @SteeringWheel, @TypeDrive, @GearBox, @Motor, @Price, @ImagePath, @Description, @SaleStatus)", sqlConnection);
+                        var adv = new Advertisiment(
+                            new Car(BrandText.Text,
+                                ModelText.Text,
+                                int.Parse(YearsComboBox.Text),
+                                Convert.ToInt32(KmAgeText.Text),
+                                MotorText.Text,
+                                GearBoxText.Text,
+                                BodyComboBox.Text,
+                                SteeringWheelText.Text,
+                                TypeDriveText.Text),
                             Convert.ToInt32(PriceText.Text),
                             Status.OnSale,
-                            new Bitmap(ImageCar.Image)
+                            new Bitmap(ImageCar.Image),
+                            TextAboutCar.Text
                             );
                         sqlCommand.Parameters.AddWithValue("@Brand", adv.Car.Brand);
                         sqlCommand.Parameters.AddWithValue("@Model", adv.Car.Model);
                         sqlCommand.Parameters.AddWithValue("@Year", adv.Car.YearRelease);
-                        sqlCommand.Parameters.AddWithValue("@Engine", adv.Car.Engine);
+                        sqlCommand.Parameters.AddWithValue("@Type", adv.Car.Body);
+                        sqlCommand.Parameters.AddWithValue("@KmAge", adv.Car.KmAge);
                         sqlCommand.Parameters.AddWithValue("@SteeringWheel", adv.Car.SteeringWheel);
+                        sqlCommand.Parameters.AddWithValue("@TypeDrive", adv.Car.TypeDrive);
                         sqlCommand.Parameters.AddWithValue("@GearBox", adv.Car.GearBox);
-                        sqlCommand.Parameters.AddWithValue("@Type", adv.Car.Type);
+                        sqlCommand.Parameters.AddWithValue("@Motor", adv.Car.Motor);
                         sqlCommand.Parameters.AddWithValue("@Price", adv.Price);
-                        sqlCommand.Parameters.AddWithValue("@SaleStatus", adv.SaleStatus.ToString());
                         sqlCommand.Parameters.AddWithValue("@ImagePath", ImagePath);
+                        sqlCommand.Parameters.AddWithValue("@Description", adv.Description);
+                        sqlCommand.Parameters.AddWithValue("@SaleStatus", adv.SaleStatus.ToString());
                         try
                         {
                             await sqlCommand.ExecuteNonQueryAsync();
