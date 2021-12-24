@@ -47,7 +47,7 @@ namespace MyApp
         {
             try
             {
-                dataAdapter = new SqlDataAdapter("SELECT Id as 'Номер объявления', Brand as 'Марка', Model as 'Модель', Year as 'Год выпуска', Price as 'Цена', 'Delete' as [Delete] FROM Adverts", sqlConnection);
+                dataAdapter = new SqlDataAdapter("SELECT Id as 'Номер объявления', Brand as 'Марка', Model as 'Модель', Year as 'Год выпуска', Price as 'Цена' , 'Delete' as [Delete] FROM Adverts", sqlConnection);
                 sqlCommandBuilder = new SqlCommandBuilder(dataAdapter);
                 dataSet = new DataSet();
                 dataAdapter.Fill(dataSet, "Adverts");
@@ -111,7 +111,7 @@ namespace MyApp
                 }
                 else
                 {
-                    OpenAdvert openAdvert = new OpenAdvert(int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()),sqlConnection);
+                    OpenAdvert openAdvert = new OpenAdvert(int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()),sqlConnection,this);
                     //MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                     openAdvert.Show();
                 }

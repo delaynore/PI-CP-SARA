@@ -112,7 +112,7 @@ namespace MyApp
                         sqlCommand.Parameters.AddWithValue("@Brand", adv.Car.Brand);
                         sqlCommand.Parameters.AddWithValue("@Model", adv.Car.Model);
                         sqlCommand.Parameters.AddWithValue("@Year", adv.Car.YearRelease);
-                        sqlCommand.Parameters.AddWithValue("@Type", adv.Car.Body);
+                        sqlCommand.Parameters.AddWithValue("@Body", adv.Car.Body);
                         sqlCommand.Parameters.AddWithValue("@KmAge", adv.Car.KmAge);
                         sqlCommand.Parameters.AddWithValue("@SteeringWheel", adv.Car.SteeringWheel);
                         sqlCommand.Parameters.AddWithValue("@TypeDrive", adv.Car.TypeDrive);
@@ -159,7 +159,7 @@ namespace MyApp
             {
                 string dest = string.Format($"{dir.FullName}\\{Path.GetFileName(ImagePath)}");
                 File.Copy(ImagePath, dest);
-                ImagePath = $".\\image\\{Path.GetFileName(ImagePath)}";
+                ImagePath = $".\\images\\{Path.GetFileName(ImagePath)}";
                 return true;
             }
             catch(Exception ex)

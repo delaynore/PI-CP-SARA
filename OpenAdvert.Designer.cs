@@ -293,6 +293,7 @@
             this.BackToMainFormButton.TabIndex = 33;
             this.BackToMainFormButton.Text = "Назад";
             this.BackToMainFormButton.UseVisualStyleBackColor = true;
+            this.BackToMainFormButton.Click += new System.EventHandler(this.BackToMainFormButton_Click);
             // 
             // DeletePictureButton
             // 
