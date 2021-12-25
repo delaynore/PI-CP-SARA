@@ -23,6 +23,7 @@ namespace MyApp
         {
             HeaderBackColor = Color.White;
             Moveable = true;
+            Resizeable = false;
             InitializeComponent();
             parentForm = form;
         }
@@ -135,6 +136,17 @@ namespace MyApp
         {
             Close();
             parentForm.Show();
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Close();
+            parentForm.Close();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
         }
     }
 }

@@ -214,11 +214,11 @@
             // AboutCarLabel
             // 
             this.AboutCarLabel.AutoSize = true;
-            this.AboutCarLabel.Location = new System.Drawing.Point(319, 301);
+            this.AboutCarLabel.Location = new System.Drawing.Point(319, 303);
             this.AboutCarLabel.Name = "AboutCarLabel";
-            this.AboutCarLabel.Size = new System.Drawing.Size(66, 15);
+            this.AboutCarLabel.Size = new System.Drawing.Size(65, 15);
             this.AboutCarLabel.TabIndex = 15;
-            this.AboutCarLabel.Text = "Состояние";
+            this.AboutCarLabel.Text = "Описание:";
             // 
             // TextAboutCar
             // 

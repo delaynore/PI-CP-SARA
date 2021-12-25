@@ -12,12 +12,16 @@ using System.Windows.Forms;
 
 namespace MyApp
 {
-    public partial class OpenAdvert : Form
+    public partial class OpenAdvert : BorderLessForm
     {
         private SqlConnection sqlConnection;
         private int index;
+        private string? ImagePath = null;
         public OpenAdvert(int indx, SqlConnection connection, Form form)
         {
+            Resizeable = false;
+            Moveable = true;
+            HeaderBackColor = Color.White;
             InitializeComponent();
             sqlConnection = connection;
             parrentForm = form;
@@ -30,21 +34,22 @@ namespace MyApp
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                BrandText.Text = reader["Brand"].ToString();
-                ModelText.Text = reader["Model"].ToString();
-                YearText.Text = reader["Year"].ToString();
-                BodyComboBox.Text = reader["Body"].ToString();
-                KmAgeText.Text = reader["KmAge"].ToString();
-                SteeringWheelText.Text = reader["SteeringWheel"].ToString();
-                TypeDriveText.Text = reader["TypeDrive"].ToString();
-                GearBoxText.Text = reader["GearBox"].ToString();
-                MotorText.Text = reader["Motor"].ToString();
-                PriceText.Text = reader["Price"].ToString();
-                TextAboutCar.Text = reader["Description"].ToString();
-                StatusText.Text = reader["SaleStatus"].ToString();
+                label2.Text = reader["Brand"].ToString();
+                label3.Text = reader["Model"].ToString();
+                label4.Text = reader["Year"].ToString();
+                label5.Text = reader["Body"].ToString();
+                label6.Text = reader["KmAge"].ToString();
+                label7.Text = reader["SteeringWheel"].ToString();
+                label8.Text = reader["TypeDrive"].ToString();
+                label9.Text = reader["GearBox"].ToString();
+                label10.Text = reader["Motor"].ToString();
+                label11.Text = reader["Price"].ToString();
+                label1.Text = reader["Description"].ToString();
+                label12.Text = reader["SaleStatus"].ToString();
+                ImagePath = reader["ImagePath"].ToString();
                 try
                 {
-                    ImageCar.Image = Image.FromFile(reader["ImagePath"].ToString());
+                    ImageCar.Image = Image.FromFile(ImagePath);
                 }
                 catch (Exception)
                 {
@@ -56,29 +61,213 @@ namespace MyApp
 
         private void BackToMainFormButton_Click(object sender, EventArgs e)
         {
-            parrentForm.Show();
-            this.Close();
+            if (BackToMainFormButton.Text == "Назад") 
+            {
+                parrentForm.Show();
+                Close();
+            }
+            else if (BackToMainFormButton.Text == "Отменить")
+            {
+                
+                BackToMainFormButton.Text = "Назад";
+                ChangeState();
+            }
         }
 
         private void OpenAdvert_Load(object sender, EventArgs e)
         {
-            CnahgeStateContols();
+            DateTime dateTime = DateTime.Now;
+            for (int i = dateTime.Year; i >= 1950; i--)
+            {
+                YearsComboBox.Items.Add(i);
+            }
             Info(index, sqlConnection);
         }
-        private void CnahgeStateContols()
+       
+
+        private void DeletePictureButton_Click(object sender, EventArgs e)
         {
-            BrandText.ReadOnly = !BrandText.ReadOnly;
-            ModelText.ReadOnly = !ModelText.ReadOnly;
-            YearText.ReadOnly = !YearText.ReadOnly;
-            BodyComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            KmAgeText.ReadOnly = !KmAgeText.ReadOnly;
-            //SteeringWheelText.ReadOnly = !SteeringWheelText.ReadOnly;
-            //TypeDriveText.ReadOnly = !TypeDriveText.ReadOnly;
-            //GearBoxText.ReadOnly = !GearBoxText.ReadOnly;
-            //MotorText.ReadOnly = !MotorText.ReadOnly;
-            PriceText.ReadOnly = !PriceText.ReadOnly;
-            StatusText.ReadOnly = !StatusText.ReadOnly;
-            TextAboutCar.ReadOnly = !TextAboutCar.ReadOnly;
+            ImageCar.Image = null;
+            ImagePath = null;
+        }
+        private void ChangeState()
+        {
+            Edit.Visible = !Edit.Visible;
+            label2.Visible = !label2.Visible;
+            label3.Visible = !label3.Visible;
+            label4.Visible = !label4.Visible;
+            label5.Visible = !label5.Visible;
+            label6.Visible = !label6.Visible;
+            label7.Visible = !label7.Visible;
+            label8.Visible = !label8.Visible;
+            label9.Visible = !label9.Visible;
+            label10.Visible = !label10.Visible;
+            label11.Visible = !label11.Visible;
+            label1.Visible = !label1.Visible;
+            label12.Visible = !label12.Visible;
+
+            DeletePictureButton.Visible = !DeletePictureButton.Visible;
+            OpenFileDialogButton.Visible = !OpenFileDialogButton.Visible;
+            SaveAdvButton.Visible = !SaveAdvButton.Visible;
+
+            BrandText.Visible = !BrandText.Visible;
+            ModelText.Visible = !ModelText.Visible;
+            YearsComboBox.Visible = !YearsComboBox.Visible;
+            BodyComboBox.Visible = !BodyComboBox.Visible;
+            KmAgeText.Visible = !KmAgeText.Visible;
+            SteeringWheelText.Visible = !SteeringWheelText.Visible;
+            TypeDriveText.Visible = !TypeDriveText.Visible;
+            GearBoxText.Visible = !GearBoxText.Visible;
+            MotorText.Visible = !MotorText.Visible;
+            PriceText.Visible = !PriceText.Visible;
+            textBox1.Visible = !textBox1.Visible;
+
+        }
+        private void Edit_Click(object sender, EventArgs e)
+        {
+            BrandText.Text = label2.Text;
+            ModelText.Text = label3.Text;
+            YearsComboBox.Text = label4.Text;
+            BodyComboBox.Text = label5.Text;
+            KmAgeText.Text = label6.Text;
+            SteeringWheelText.Text = label7.Text;
+            TypeDriveText.Text = label8.Text;
+            GearBoxText.Text = label9.Text;
+            MotorText.Text = label10.Text;
+            PriceText.Text = label11.Text;
+            textBox1.Text = label1.Text;
+
+            ChangeState();
+            BackToMainFormButton.Text = "Отменить";
+        }
+
+        private void OpenFileDialogButton_Click(object sender, EventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Изображения |*.jpeg; *.jpg; *.png";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ImageCar.Image = Image.FromFile(openFileDialog.FileName);
+                ImagePath = openFileDialog.FileName;
+            }
+        }
+
+        private async void SaveAdvButton_Click(object sender, EventArgs e)
+        {
+            if (AllFieldsAreFilled() && AllFieldsFilledCorrectly())
+            {
+                sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DataBaseConnectionString"].ConnectionString);
+                try
+                {
+                    await sqlConnection.OpenAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                if (sqlConnection.State == ConnectionState.Open)
+                {
+                    
+                    if (CopyImageToProjectFolder() == true)
+                    {
+                       
+                        var adv = new Advertisiment(
+                            new Car(BrandText.Text,
+                                ModelText.Text,
+                                int.Parse(YearsComboBox.Text),
+                                Convert.ToInt32(KmAgeText.Text),
+                                MotorText.Text,
+                                GearBoxText.Text,
+                                BodyComboBox.Text,
+                                SteeringWheelText.Text,
+                                TypeDriveText.Text),
+                            Convert.ToInt32(PriceText.Text),
+                            Status.OnSale,
+                            new Bitmap(ImageCar.Image),
+                            textBox1.Text
+                            );
+                        var sqlCommand = new SqlCommand("UPDATE [Adverts]" +
+                           $@" SET Brand={adv.Car.Brand}, Model={adv.Car.Model}, Year={adv.Car.YearRelease}, Body={adv.Car.Body}, KmAge={adv.Car.KmAge}, SteeringWheel={adv.Car.SteeringWheel}, TypeDrive={adv.Car.TypeDrive}, GearBox={adv.Car.GearBox}, Motor={adv.Car.Motor}, Price={adv.Price}, ImagePath=красиво, Description={adv.Description}, SaleStatus={adv.SaleStatus.ToString()})" +
+                           $" WHERE Id={index};", sqlConnection); //исправить
+                       
+                        //try
+                        //{
+                            await sqlCommand.ExecuteNonQueryAsync();
+                            MessageBox.Show("Обьявление изменено", "Уведомление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                            Close();
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //}
+                        sqlConnection.Close();
+                    }
+                    sqlConnection.Close();
+
+                }
+            }
+        }
+
+        private bool AllFieldsFilledCorrectly()
+        {
+            int a;
+            if (!int.TryParse(KmAgeText.Text, out a))
+            {
+                MessageBox.Show(String.Format("В поле 'Пробег' дожно быть целое число"), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (!int.TryParse(PriceText.Text, out a))
+            {
+                MessageBox.Show(String.Format("В поле 'Цена' дожно быть целое число"), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private bool AllFieldsAreFilled()
+        {
+            if (BrandText.Text == null || ModelText.Text == null
+                || YearsComboBox.Text == null || BodyComboBox.Text == null
+                || KmAgeText.Text == null || SteeringWheelText.Text == null
+                || TypeDriveText.Text == null || GearBoxText.Text == null
+                || MotorText.Text == null || ImagePath == null
+                || textBox1.Text == null || PriceText.Text == null)
+            {
+                MessageBox.Show("Не все поля заполнены", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        private bool CopyImageToProjectFolder()
+        {
+            var folderPath = Path.GetDirectoryName(Application.ExecutablePath);
+            var dir = new DirectoryInfo($"{folderPath}\\images");
+            if (!dir.Exists)
+            {
+                dir.Create();
+            }
+            try
+            {
+                string dest = string.Format($"{dir.FullName}\\{Path.GetFileName(ImagePath)}");
+                File.Copy(ImagePath, dest);
+                ImagePath = $".\\images\\{Path.GetFileName(ImagePath)}";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(String.Format("Картинка с таким именем существует, измените название"), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
