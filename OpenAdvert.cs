@@ -167,10 +167,7 @@ namespace MyApp
                 }
                 if (sqlConnection.State == ConnectionState.Open)
                 {
-                    
-                    if (CopyImageToProjectFolder() == true)
-                    {
-                       
+
                         var adv = new Advertisiment(
                             new Car(BrandText.Text,
                                 ModelText.Text,
@@ -186,21 +183,34 @@ namespace MyApp
                             new Bitmap(ImageCar.Image),
                             textBox1.Text
                             );
-                        var sqlCommand = new SqlCommand("UPDATE [Adverts]" +
-                           $@" SET Brand={adv.Car.Brand}, Model={adv.Car.Model}, Year={adv.Car.YearRelease}, Body={adv.Car.Body}, KmAge={adv.Car.KmAge}, SteeringWheel={adv.Car.SteeringWheel}, TypeDrive={adv.Car.TypeDrive}, GearBox={adv.Car.GearBox}, Motor={adv.Car.Motor}, Price={adv.Price}, ImagePath=красиво, Description={adv.Description}, SaleStatus={adv.SaleStatus.ToString()})" +
-                           $" WHERE Id={index};", sqlConnection); //исправить
-                       
-                        //try
-                        //{
-                            await sqlCommand.ExecuteNonQueryAsync();
-                            MessageBox.Show("Обьявление изменено", "Уведомление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                            Close();
-                        //}
-                        //catch (Exception ex)
-                        //{
-                        //    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        //}
-                        sqlConnection.Close();
+                    var sqlCommand = new SqlCommand("INSERT INTO [Adverts]" +
+                            " (Brand, Model, Year, Body, KmAge, SteeringWheel, TypeDrive, GearBox, Motor, Price, ImagePath, Description, SaleStatus)" +
+                            "VALUES(@Brand, @Model, @Year, @Body, @KmAge, @SteeringWheel, @TypeDrive, @GearBox, @Motor, @Price, @ImagePath, @Description, @SaleStatus)", sqlConnection);                 
+
+                    sqlCommand.Parameters.AddWithValue("@Brand", adv.Car.Brand);
+                    sqlCommand.Parameters.AddWithValue("@Model", adv.Car.Model);
+                    sqlCommand.Parameters.AddWithValue("@Year", adv.Car.YearRelease);
+                    sqlCommand.Parameters.AddWithValue("@Body", adv.Car.Body);
+                    sqlCommand.Parameters.AddWithValue("@KmAge", adv.Car.KmAge);
+                    sqlCommand.Parameters.AddWithValue("@SteeringWheel", adv.Car.SteeringWheel);
+                    sqlCommand.Parameters.AddWithValue("@TypeDrive", adv.Car.TypeDrive);
+                    sqlCommand.Parameters.AddWithValue("@GearBox", adv.Car.GearBox);
+                    sqlCommand.Parameters.AddWithValue("@Motor", adv.Car.Motor);
+                    sqlCommand.Parameters.AddWithValue("@Price", adv.Price);
+                    sqlCommand.Parameters.AddWithValue("@ImagePath", ImagePath);
+                    sqlCommand.Parameters.AddWithValue("@Description", adv.Description);
+                    sqlCommand.Parameters.AddWithValue("@SaleStatus", adv.SaleStatus.ToString());
+                    try
+                    {
+                        await sqlCommand.ExecuteNonQueryAsync();
+                        var sqlcmd = new SqlCommand($"Delete FROM Adverts WHERE Id={index}",sqlConnection);
+                        await sqlcmd.ExecuteNonQueryAsync();
+                        MessageBox.Show("Обьявление изменено", "Уведомление", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     sqlConnection.Close();
 
@@ -238,27 +248,7 @@ namespace MyApp
             }
             return true;
         }
-        private bool CopyImageToProjectFolder()
-        {
-            var folderPath = Path.GetDirectoryName(Application.ExecutablePath);
-            var dir = new DirectoryInfo($"{folderPath}\\images");
-            if (!dir.Exists)
-            {
-                dir.Create();
-            }
-            try
-            {
-                string dest = string.Format($"{dir.FullName}\\{Path.GetFileName(ImagePath)}");
-                File.Copy(ImagePath, dest);
-                ImagePath = $".\\images\\{Path.GetFileName(ImagePath)}";
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(String.Format("Картинка с таким именем существует, измените название"), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
+        
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
